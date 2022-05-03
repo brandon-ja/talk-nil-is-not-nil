@@ -4,6 +4,10 @@ TUE, MAY 3, 2022
 Brandon Atkinson
 brandon.atkinson@getweave.com
 
+* Bio
+DevX engineer at Weave
+We use Go to build infrastructure and tooling for our devs
+
 * The PR
 Body needs to be an `io.Reader`
 .code pr/PR.go /^//START_BODY/,/^//END_BODY/
