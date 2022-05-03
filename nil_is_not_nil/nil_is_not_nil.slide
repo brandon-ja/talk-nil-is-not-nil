@@ -6,26 +6,26 @@ brandon.atkinson@getweave.com
 
 * The PR
 Body needs to be an `io.Reader`
-.code nil_is_not_nil/pr/PR.go /^//START_BODY/,/^//END_BODY/
+.code pr/PR.go /^//START_BODY/,/^//END_BODY/
 
 It may or may not get set in the preceding code so we need to check if it's nil
-.code nil_is_not_nil/pr/PR.go /^//START_CHECK/,/^//END_CHECK/
+.code pr/PR.go /^//START_CHECK/,/^//END_CHECK/
 
 * The Code Review
 I suggested the following refactor. Nil is nil right?
 
 *old* *code*
-.play nil_is_not_nil/pr/PR.go /^//START_CHECK/,/^//END_CHECK/
+.play pr/PR.go /^//START_CHECK/,/^//END_CHECK/
 
 *new* *code*
-.play nil_is_not_nil/refactor/refactor.go /^//START/,/^//END/
+.play refactor/refactor.go /^//START/,/^//END/
 
 * What's Going On?
 Lets check out the `http.NewRequest` code
 .link https://pkg.go.dev/net/http#NewRequest Go Docs for net/http package
 
 Relevant code snippet
-.code nil_is_not_nil/nethttp/nethttp.go /^//START/,/^//END/
+.code nethttp/nethttp.go /^//START/,/^//END/
 
 It looks like we're checking for nil, but the code still panics, so what gives?
 
@@ -44,7 +44,7 @@ T is the interface's type
 
 * Go Interfaces Cont.
 which of these will be nil?
-.play nil_is_not_nil/nilInterface/nilInterface.go /^//START/,/^//END/
+.play nilInterface/nilInterface.go /^//START/,/^//END/
 
 * Go Interfaces Cont.
 `b` is a non nil interface which has a T=*int and V=nil
@@ -53,10 +53,10 @@ which of these will be nil?
 
 * What's Going On?
 `http.NewRequest` function signature
-.code nil_is_not_nil/nethttp/nethttp.go /^//START_SIG/,/^//END_SIG/
+.code nethttp/nethttp.go /^//START_SIG/,/^//END_SIG/
 
 `http.NewRequest` code revisited
-.code nil_is_not_nil/nethttp/nethttp.go /^//START/,/^//END/
+.code nethttp/nethttp.go /^//START/,/^//END/
 
 * How to Solve This
 - Expect callers to pass nil explicitly
@@ -68,8 +68,8 @@ this is what the net/http package does.
 If you do this you'll only confuse developers who haven't seen this talk.
 
 * Check for Nil After Getting a Concrete Type
-.code nil_is_not_nil/solutions/solutions.go /^//START/,/^//END/
+.code solutions/solutions.go /^//START/,/^//END/
 
 * Using Reflect
 Disclaimer, this may not cover every possible edge case!
-.code nil_is_not_nil/solutions/solutions.go /^//START_FN/,/^//END_FN/
+.code solutions/solutions.go /^//START_FN/,/^//END_FN/
