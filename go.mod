@@ -2,9 +2,6 @@ module github.com/brandon-ja/talk-nil-is-not-nil
 
 go 1.18
 
-require (
-	github.com/yuin/goldmark v1.4.1 // indirect
-	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
-	golang.org/x/sys v0.0.0-20211019181941-9d821ace8654 // indirect
-	golang.org/x/tools v0.1.10 // indirect
-)
+require github.com/weave-lab/puffin v0.0.0-20221017231602-09b0840fc815
+
+require golang.org/x/exp v0.0.0-20221006183845-316c7553db56 // indirect
