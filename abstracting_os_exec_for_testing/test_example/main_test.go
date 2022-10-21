@@ -1,9 +1,8 @@
 package main
 
 import (
-	"testing"
-
 	"github.com/weave-lab/puffin"
+	"testing"
 )
 
 // START_TEST OMIT

@@ -1,9 +1,8 @@
 package main
 
 import (
-	"testing"
-
 	"github.com/weave-lab/puffin"
+	"testing"
 )
 
 func Test_branchIsClean(t *testing.T) {

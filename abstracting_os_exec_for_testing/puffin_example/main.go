@@ -1,19 +1,19 @@
 package main
 
 import (
-	"fmt"
 	"github.com/weave-lab/puffin"
+	"log"
 )
 
 func main() {
-	cmd := puffin.NewOsExec().Command("go", "test", "-test.v", "-test.run", `^\QTest_branchIsClean\E$`)
-	out, err := cmd.Output()
+	// START_INVOKE OMIT
+	clean, err := branchIsClean(puffin.NewOsExec())
+	// END_INVOKE OMIT
 	if err != nil {
-		fmt.Println("ERROR: ", err)
-		return
+		log.Fatalln(err)
 	}
 
-	fmt.Println(string(out))
+	log.Printf("clean: %v\n", clean)
 }
 
 // START_FUNC OMIT

@@ -1,9 +1,8 @@
 package main
 
 import (
-	"log"
-
 	"github.com/weave-lab/puffin"
+	"log"
 )
 
 func main() {
@@ -15,7 +14,6 @@ func main() {
 	log.Printf("clean: %v\n", clean)
 }
 
-// START_FUNC OMIT
 func branchIsClean(exec puffin.Exec) (bool, error) {
 	cmd := exec.Command("git", "status", "--porcelain")
 	status, err := cmd.Output()
@@ -25,5 +23,3 @@ func branchIsClean(exec puffin.Exec) (bool, error) {
 
 	return len(status) == 0, nil
 }
-
-// END_FUNC OMIT
