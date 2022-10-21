@@ -1,0 +1,54 @@
+Abstracting os/exec for Testing
+FRI, OCT 21, 2022
+
+Brandon Atkinson
+brandon.atkinson@getweave.com
+
+* Bio
+DevX engineer at Weave
+
+We use Go to build infrastructure and tooling for our engineers
+
+* The Problem
+Since the beginning of the year Weave has increased it's focus on testing.
+
+All the low hanging fruit is disappearing.
+
+* os/exec
+"Package exec runs external commands. It wraps os.StartProcess to make it easier to remap stdin and stdout, connect I/O with pipes, and do other adjustments."
+.code exec_example/main.go /^//START_FUNC/,/^//END_FUNC/
+
+* Now Write a Test
+Option A: create a local git repo for testing
+
+Option B: temporarily swap 'git' out in the path
+
+Option C: just don't?
+
+* Enter Puffin
+.link https://github.com/weave-lab/puffin puffin abstracts the os/exec go package
+
+Allows easy dependency injection and polymorphism to make testing shell commands easy
+
+Exposes an Exec interface with 2 implementations
+ - OsExec
+ - FuncExec
+
+* Refactoring The Code
+changing code to use puffin is pretty easy
+.code puffin_example/main.go /^//START_FUNC/,/^//END_FUNC/
+which is called like this
+.code puffin_example/main.go /^//START_INVOKE/,/^//END_INVOKE/
+
+* Now Write a Test
+.code test_example/main_test.go /^//START_TEST/,/^//END_TEST/
+
+* Adding Some Test Cases
+.code puffin_example/main_test.go /^//START_CASES/,/^//END_CASES/
+
+* Is this Actually Useful
+We're not actually interested in testing the underlying os
+
+Puffin helps you get shell commands out of the way so you can test your actual code
+
+.link https://github.com/weave-lab/puffin github.com/weave-lab/puffin
